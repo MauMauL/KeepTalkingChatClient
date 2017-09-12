@@ -32,7 +32,7 @@ public class ChatUI{
 				client = new Client(name.getText());
 	    		client.setGUI(this);
 	    		
-				server = (IServer)Naming.lookup("rmi://"+ip.getText()+":8080/myabc");
+				server = (IServer)Naming.lookup("rmi://"+ip.getText()+":" + port.getText() + "/chat");
 				server.login(client);
 				
 				updateUsers(server.getConnected());
@@ -63,7 +63,7 @@ public class ChatUI{
     	return;	
     }
       String st=tf.getText();
-      st="["+name.getText()+"] "+st;
+      st="["+name.getText()+"]: "+st;
       tf.setText("");
       //Remove if you are going to implement for remote invocation
       try
@@ -109,7 +109,7 @@ public class ChatUI{
   //User Interface code.
   public ChatUI()
   {
-	    frame=new JFrame("Group Chat");
+	    frame=new JFrame("Keep Talking Chat");
 	    JPanel main =new JPanel();
 	    JPanel top =new JPanel();
 	    JPanel cn =new JPanel();
@@ -117,6 +117,7 @@ public class ChatUI{
 	    ip=new JTextField();
 	    tf=new JTextField();
 	    name=new JTextField();
+	    port = new JTextField();
 	    tx=new JTextArea();
 	    connect=new JButton("Connect");
 	    JButton bt=new JButton("Send");
@@ -125,8 +126,9 @@ public class ChatUI{
 	    top.setLayout(new GridLayout(1,0,5,5));   
 	    cn.setLayout(new BorderLayout(5,5));
 	    bottom.setLayout(new BorderLayout(5,5));
-	    top.add(new JLabel("Your name: "));top.add(name);    
+	    top.add(new JLabel("Your name: "));top.add(name);   	    
 	    top.add(new JLabel("Server Address: "));top.add(ip);
+	    top.add(new JLabel("Server Port: "));top.add(port);
 	    top.add(connect);
 	    cn.add(new JScrollPane(tx), BorderLayout.CENTER);        
 	    cn.add(lst, BorderLayout.EAST);    
@@ -162,12 +164,12 @@ public class ChatUI{
 	    });
 	    
 	    frame.setContentPane(main);
-	    frame.setSize(600,600);
+	    frame.setSize(800,600);
 	    frame.setVisible(true);  
 	  }
   
 	  JTextArea tx;
-	  JTextField tf,ip, name;
+	  JTextField tf,ip, name, port;
 	  JButton connect;
 	  JList lst;
 	  JFrame frame;

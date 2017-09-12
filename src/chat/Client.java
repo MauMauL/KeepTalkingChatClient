@@ -13,7 +13,6 @@ public class Client  extends UnicastRemoteObject implements IClient{
 		}
 	
 	public void tell(String st) throws RemoteException{
-		System.out.println(st);
 		ui.writeMsg(st);
 	}
 	public String getName() throws RemoteException{

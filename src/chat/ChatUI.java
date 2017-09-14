@@ -13,18 +13,18 @@ public class ChatUI{
   private IServer server;
   public void doConnect()
   {
-	    if (connect.getText().equals("Connect"))
+	    if (connect.getText().equals("Conectar"))
 	    {
 	    	if (name.getText().length()<2)
 	    	{
-	    		JOptionPane.showMessageDialog(frame, "You need to type a name.");
+	    		JOptionPane.showMessageDialog(frame, "Por favor, digite um nome.");
 	    		
 	    		return;
 	    	}
 	    	
 	    	if (ip.getText().length()<2)
 	    	{
-	    		JOptionPane.showMessageDialog(frame, "You need to type an IP."); 
+	    		JOptionPane.showMessageDialog(frame, "Por favor, digite um IP."); 
 	    		
 	    		return;
 	    	}	    	
@@ -36,44 +36,43 @@ public class ChatUI{
 				server.login(client);
 				
 				updateUsers(server.getConnected());
-			    connect.setText("Disconnect");
+			    connect.setText("Desconectado");
 			    
 	    	}
 	    	catch(Exception e)
 	    	{
 	    		e.printStackTrace();
 	    		
-	    		JOptionPane.showMessageDialog(frame, "ERROR, problem to connect. Error: " + e.getMessage());	    	
+	    		JOptionPane.showMessageDialog(frame, "Erro, problema ao tentar conectar. " + e.getMessage());	    	
 	    	}		  
 	      }
 	    	else
 	    	{
 	    	  	updateUsers(null);
-	    	  	connect.setText("Connect");
-	    	  	//Better to implement Logout ....
+	    	  	connect.setText("Conectar");
 		}
 	  }  
   
   public void sendText()
   {
-    if (connect.getText().equals("Connect"))
+    if (connect.getText().equals("Conectar"))
     {
-    	JOptionPane.showMessageDialog(frame, "You need to connect first."); 
+    	JOptionPane.showMessageDialog(frame, "Por favor, conecte ao servidor."); 
     	
     	return;	
     }
       String st=tf.getText();
       st="["+name.getText()+"]: "+st;
       tf.setText("");
-      //Remove if you are going to implement for remote invocation
-      try
-      {
-    	  server.publish(st);
-  	  }
-      catch(Exception e)
-      {
-    	  e.printStackTrace();
-      }
+
+//      try
+//      {
+//    	  server.publish(st);
+//  	  }
+//      catch(Exception e)
+//      {
+//    	  e.printStackTrace();
+//      }
   }
  
   public void writeMsg(String st)
@@ -85,7 +84,7 @@ public class ChatUI{
   {
       DefaultListModel listModel = new DefaultListModel();
       
-      if(v!=null) 
+      if(v != null) 
     	  for (int i=0; i < v.size(); i++)
     	  {    	  
     		  try
@@ -106,7 +105,6 @@ public class ChatUI{
 	ChatUI c = new ChatUI();
   }  
   
-  //User Interface code.
   public ChatUI()
   {
 	    frame=new JFrame("Keep Talking Chat");
@@ -119,16 +117,16 @@ public class ChatUI{
 	    name=new JTextField();
 	    port = new JTextField();
 	    tx=new JTextArea();
-	    connect=new JButton("Connect");
-	    JButton bt=new JButton("Send");
+	    connect=new JButton("Conectar");
+	    JButton bt=new JButton("Enviar");
 	    lst=new JList();        
 	    main.setLayout(new BorderLayout(5,5));         
 	    top.setLayout(new GridLayout(1,0,5,5));   
 	    cn.setLayout(new BorderLayout(5,5));
 	    bottom.setLayout(new BorderLayout(5,5));
-	    top.add(new JLabel("Your name: "));top.add(name);   	    
-	    top.add(new JLabel("Server Address: "));top.add(ip);
-	    top.add(new JLabel("Server Port: "));top.add(port);
+	    top.add(new JLabel("Nome: "));top.add(name);   	    
+	    top.add(new JLabel("IP do servidor: "));top.add(ip);
+	    top.add(new JLabel("Porta do servidor: "));top.add(port);
 	    top.add(connect);
 	    cn.add(new JScrollPane(tx), BorderLayout.CENTER);        
 	    cn.add(lst, BorderLayout.EAST);    

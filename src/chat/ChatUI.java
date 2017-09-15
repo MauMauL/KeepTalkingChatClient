@@ -65,14 +65,14 @@ public class ChatUI{
       st="["+name.getText()+"]: "+st;
       tf.setText("");
 
-//      try
-//      {
-//    	  server.publish(st);
-//  	  }
-//      catch(Exception e)
-//      {
-//    	  e.printStackTrace();
-//      }
+      try
+      {
+    	  server.publish(st);
+  	  }
+      catch(Exception e)
+      {
+    	  e.printStackTrace();
+      }
   }
  
   public void writeMsg(String st)
